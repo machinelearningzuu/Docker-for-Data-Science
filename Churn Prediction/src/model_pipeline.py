@@ -1,3 +1,4 @@
+import pickle
 from catboost import CatBoostClassifier
 from sklearn.metrics import recall_score, precision_score
 
@@ -11,7 +12,8 @@ class ModelPipeline:
                                         random_seed=123,
                                         verbose=True
                                         )
-        
+        self.model_path = 'artifacts/model.pkl'     
+
     def fit(
             self, 
             train_data, 
@@ -21,6 +23,8 @@ class ModelPipeline:
                         train_data,
                         eval_set=val_data
                         )
+        with open(self.model_path, 'wb') as f:
+            pickle.dump(self.model, f)
         
     def predict(
                 self, 

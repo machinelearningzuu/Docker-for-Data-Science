@@ -5,4 +5,8 @@ WORKDIR /Users/1zuu/Library/Mobile Documents/com~apple~CloudDocs/ML STU/Docker f
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-CMD ["python","train.py"]
+COPY app.py .
+COPY src ./src
+COPY artifacts ./artifacts
+
+CMD ["python","app.py"]
